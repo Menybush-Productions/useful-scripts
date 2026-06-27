@@ -1,18 +1,36 @@
 param(
-    [switch]$y = $false
+	[switch]$manual = $false
 )
 
-Write-Output "Mode: $y"
-Write-Output "Invalid Firewall Rules:"
-Get-NetFirewallApplicationFilter | ForEach-Object {
-    $program = $_.Program
-    if ([System.IO.Path]::IsPathRooted($program)) {
-        if (!(Test-Path -Path "$program" -PathType Leaf)) {
-            Write-Output "$program"
-            if ($y) {
-                $_ | Remove-NetFirewallRule
-            }
-        }
-    }
+function List-FWRules {
+	Write-Output "Invalid Firewall Rules:"
+	Get-NetFirewallApplicationFilter | ForEach-Object {
+		$program = $_.Program
+		if ([System.IO.Path]::IsPathRooted($program)) {
+			if (!(Test-Path -Path "$program" -PathType Leaf)) {
+				Write-Output "$program"
+			}
+		}
+	}
 }
-Write-Output "Note: if you wish to remove these invalid rules, run the script again with -y "
+function Clear-FWRules {
+	Write-Output "Removing Invalid Firewall Rules:"
+	Get-NetFirewallApplicationFilter | ForEach-Object {
+		$program = $_.Program
+		if ([System.IO.Path]::IsPathRooted($program)) {
+			if (!(Test-Path -Path "$program" -PathType Leaf)) {
+				Write-Output "Removed: $program"
+				$_ | Remove-NetFirewallRule
+			}
+		}
+	}
+}
+
+Write-Host "#############################################"
+List-FWRules
+
+$confirm = Read-Host "Do your really want to remove these invalid rules? [y/n]"
+if($confirm -eq "y") { Clear-FWRules }
+
+Write-Host "Script completed successfully!" -ForegroundColor Green
+Write-Host "#############################################"
