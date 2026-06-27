@@ -2,6 +2,7 @@ param(
     [switch]$y = $false
 )
 
+Write-Output "Mode: $y"
 Write-Output "Invalid Firewall Rules:"
 Get-NetFirewallApplicationFilter | ForEach-Object {
     $program = $_.Program
@@ -14,3 +15,4 @@ Get-NetFirewallApplicationFilter | ForEach-Object {
         }
     }
 }
+Write-Output "Note: if you wish to remove these invalid rules, run the script again with -y "
