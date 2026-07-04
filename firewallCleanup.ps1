@@ -2,6 +2,14 @@ param(
 	[switch]$manual = $false
 )
 
+function Invoke-ReadKey {
+	param (
+		[Parameter(Mandatory = $false)] [string]$message = "Press a key to continue..."
+	)
+	Write-Host $message -ForegroundColor Cyan
+	$null = [System.Console]::ReadKey($true)
+	Clear-Host
+}
 function List-FWRules {
 	Write-Output "Invalid Firewall Rules:"
 	Get-NetFirewallApplicationFilter | ForEach-Object {
@@ -34,3 +42,4 @@ if($confirm -eq "y") { Clear-FWRules }
 
 Write-Host "Script completed successfully!" -ForegroundColor Green
 Write-Host "#############################################"
+Invoke-ReadKey -Message "Press a key to exit!"
