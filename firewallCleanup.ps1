@@ -1,8 +1,4 @@
-﻿param(
-	[switch]$manual = $false
-)
-
-function Invoke-ReadKey {
+﻿function Invoke-ReadKey {
 	param (
 		[Parameter(Mandatory = $false)] [string]$message = "Press a key to continue..."
 	)
@@ -10,7 +6,7 @@ function Invoke-ReadKey {
 	$null = [System.Console]::ReadKey($true)
 	Clear-Host
 }
-function List-FWRules {
+function Get-FWRules {
 	Write-Output "Invalid Firewall Rules:"
 	Get-NetFirewallApplicationFilter | ForEach-Object {
 		$program = $_.Program
@@ -35,7 +31,7 @@ function Clear-FWRules {
 }
 
 Write-Host "#############################################"
-List-FWRules
+Get-FWRules
 
 $confirm = Read-Host "Do your really want to remove these invalid rules? [y/n]"
 if($confirm -eq "y") { Clear-FWRules }
@@ -47,8 +43,8 @@ Invoke-ReadKey -Message "Press a key to exit!"
 # SIG # Begin signature block
 # MIIclgYJKoZIhvcNAQcCoIIchzCCHIMCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+gMMSzriphVDl5JY7Cd4Ld3R
-# rjWgghcCMIIDxDCCAqygAwIBAgIQRqaG/Zc3Po5BF31FOLqbBTANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7NkjtI0u3pwsu7dkenVaYZPA
+# i4KgghcCMIIDxDCCAqygAwIBAgIQRqaG/Zc3Po5BF31FOLqbBTANBgkqhkiG9w0B
 # AQsFADAfMR0wGwYDVQQDDBRNZW55QnVzaCBQcm9kdWN0aW9uczAeFw0yNjA3MDQx
 # MjE4MTZaFw0yOTA3MDQxMjI4MTVaMB8xHTAbBgNVBAMMFE1lbnlCdXNoIFByb2R1
 # Y3Rpb25zMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApsU5F3dB4odF
@@ -174,28 +170,28 @@ Invoke-ReadKey -Message "Press a key to exit!"
 # AgEBMDMwHzEdMBsGA1UEAwwUTWVueUJ1c2ggUHJvZHVjdGlvbnMCEEamhv2XNz6O
 # QRd9RTi6mwUwCQYFKw4DAhoFAKB4MBgGCisGAQQBgjcCAQwxCjAIoAKAAKECgAAw
 # GQYJKoZIhvcNAQkDMQwGCisGAQQBgjcCAQQwHAYKKwYBBAGCNwIBCzEOMAwGCisG
-# AQQBgjcCARUwIwYJKoZIhvcNAQkEMRYEFE+C+CZzwKkpk6fOr37qyafXeDq7MA0G
-# CSqGSIb3DQEBAQUABIIBAA9DZ1V3mOdX7UuwXOuV2a/hfylmy/Ji0p3rrE0isVDE
-# sS4QmOleam7gtemEEwWgj0BYyA8+c3KaHYwHlBpMDkqV9mTUgvKEychS4PQEoPYK
-# yLoXAzi5AnsbvDgy+zGpuThy+j+MIe9ezl8nFhyinuLjc7aa5hU1pQhi6VczdarA
-# afDWANQfvr6Wr5Ye4pPi4zKzEy90mTfdo1ScTmNj7xJnkwyjfGl8K4RTH2w88N+X
-# 1I7R1v6D+5SBRNytCFoQqMtPn5KZxCo9hI9zdPS13IXyDW1E/DBnr/6l6Ev86xgR
-# HYi9o++o8zj5hAhqBTcg7xvWUVuJ+r7Xnr8FeXp21sehggMmMIIDIgYJKoZIhvcN
+# AQQBgjcCARUwIwYJKoZIhvcNAQkEMRYEFKa/qnysYrV+sMb2D98QYYau3rZ0MA0G
+# CSqGSIb3DQEBAQUABIIBAA+bQhcxZrI0xlTXQuObYG16PrYipk5+jJc44doLxxbl
+# ahu+La7AlZihkssPyRDx/ZycQp+zsZ4JhDY/43sGg9wb5n4WVXJcY3Vzbdgy4Gq7
+# RMZFmSl12uiKDB1CmX8NxG/MhxJscTN+Lzlj8bvJCbw8K1+6M70mc6RR0dRvhx8J
+# /YGgyxF2e3JytPOlPjOajNpOoPBNlUNZ3xiu/jMYytO9AYfpqx4qYEQu/RdcJU2f
+# SCDNtlLhyNE8n3+NbZAYNOYs186PokXGeid5FZPztbLnWuns78VP6dRCg9IkbIHg
+# Drlqh6S3v9NxoARtznv8hUKypz927E1FGc3uLHgSNayhggMmMIIDIgYJKoZIhvcN
 # AQkGMYIDEzCCAw8CAQEwfTBpMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNl
 # cnQsIEluYy4xQTA/BgNVBAMTOERpZ2lDZXJ0IFRydXN0ZWQgRzQgVGltZVN0YW1w
 # aW5nIFJTQTQwOTYgU0hBMjU2IDIwMjUgQ0ExAhAKgO8YS43xBYLRxHanlXRoMA0G
 # CWCGSAFlAwQCAQUAoGkwGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG
-# 9w0BCQUxDxcNMjYwNzA0MTIzODAzWjAvBgkqhkiG9w0BCQQxIgQgyzDW8uW09Z3/
-# 0Jx4YTMx9GL/m5z0x1ct0CEIvUQn5uIwDQYJKoZIhvcNAQEBBQAEggIAXglGkids
-# PFmQ6/XZTn9Su5aA6R4SrbhItK5vJY5fuZ+fZzF9FsVgPkV5oFL7nJqOwL9SiyyL
-# BGz8JeQzmBp8E/YFkrk1dB0Rwj4AgZD1pay6OmbD9UzrDmc8KE3/ac+/JG99gKGM
-# qmMjM1iV1Aco+rNX4XIwkR72kJcqeNospb3LouNFiQ7a7kYq6GrnnO1yRG1zyRy+
-# 8SOV42THx96dY5Mtsee48vec0TUSnZsa7cGcEBI5sH23+B/28f+DJkRbJ2PyADNs
-# WnB6OALvBFR9IWu2itZhMJyf0DcRoot4bxBrIJSYXHZ2qCU1L8kv1TGXz4Fe+5Yk
-# sE35G/CHJSm55tj01VXxulwxz4X5oL952cKFZyuibXVqmNBu+k33RXAD4zALj1qc
-# jTcEB7XxUMrGC6YZbUEEjk2R6zyTWm20KgD/7Wo9YHPw63F8q7tqlfmsSoKmrzSI
-# 4UJMkvJ+tKFDYlFKOAkCSev1D2k45r0wpzyVeX82uShMuLz8J4BHlXLq2PNczHc9
-# 8KxwyOIAJeDPn9qrea2Jva9E7pM9SZvUF8pS4CvnTCoPgOgkWBLrSKWh+WGu9yLi
-# TOVvhERU1GYQMOQUYXHWbKopGBGy6rm6mdYAjtDNP5Q8/Q76S1D+UUyXVd7Q94gH
-# g/C5NIUZ7btqsH+ZFbamAAOwAIN7+Gumyxk=
+# 9w0BCQUxDxcNMjYwNzA0MTI1MTIyWjAvBgkqhkiG9w0BCQQxIgQgAk+FypkMxiAH
+# sqDER8E3IOV5Mh+OHo2yBWpHUOJPPXcwDQYJKoZIhvcNAQEBBQAEggIAsOm0DvsP
+# vSbblHsARlHkA+PEu7ALPIP5tGxUxU8mzSTnqvwHd2g7J1W6LlGFzh2C2yvPFMuY
+# OBtyLIsJbEjVN4yq5EXwB8EAwR85DOiazk8Yzq/ZSfxVQ7xLKLRoOxAFvG9BKvcW
+# IkuRYiTvg0lSCudfdUJKaff3lz+65FTvzJeHwJe9Gsn/JjaQu7KQGr04FgLpSTIv
+# yiKbtHHfZ7D6VBuQfvgd9ZDcDwawFuozIE1JpgrxiixeA48vxbaZTWvgxjIth7mK
+# P6bgErjhIihVcn5FDg6pl7OYbAY0Lu4jV6jD/38Cxlavty6qney4BOdFX+1GljaW
+# HgoFobp+U0jx8kM4ES2pXAL9NI1JDIYRfMRpwGIP/TUDTeGzucutO26yWLE6eFwx
+# Fcmw+mqu/KlMHrlsmRBazbrv+NcF2uNDoA6YF1aDoFHXDoYi0DjpjzLLpIgSy+bC
+# 6Bg+l4Nu8hZe3+ezTsRDH2OOYXHVkRZi3GIGcI2+QxaAJmX2ZglZteMOc2oGv3Pg
+# 7iWl+yNwxKsCHYmEeI4UQrmOWaFAdJBgDNorAy4XXoO4emuQqJyDOtxLoe1DaN47
+# Z6ogz/hM0UzFhswRk4Bk7WHeve+uktO2mcB74P6DkGyXFKhk1qDCyOk0XTqqLHm+
+# 7BJdKrc5syRozkX4f5J2hjlztWHuu8kxzQk=
 # SIG # End signature block
