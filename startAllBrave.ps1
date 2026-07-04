@@ -1,16 +1,18 @@
-function Invoke-ResetAll {
-    scoop bucket rm *
-    scoop bucket known | ForEach-Object { scoop bucket add $_ }
-}
+param
+(
+	[string]$exeLocation
+	[string]$dataLocation
+)
+C:\Users\Adam\AppData\Local\_scoop\apps\brave\current\brave.exe --user-data-dir="C:\Users\Adam\AppData\Local\_scoop\apps\brave\current\User Data" --profile-directory="Default"
+C:\Users\Adam\AppData\Local\_scoop\apps\brave\current\brave.exe --user-data-dir="C:\Users\Adam\AppData\Local\_scoop\apps\brave\current\User Data" --profile-directory="Profile 2"
+C:\Users\Adam\AppData\Local\_scoop\apps\brave\current\brave.exe --user-data-dir="C:\Users\Adam\AppData\Local\_scoop\apps\brave\current\User Data" --profile-directory="Profile 3"
+C:\Users\Adam\AppData\Local\_scoop\apps\brave\current\brave.exe --user-data-dir="C:\Users\Adam\AppData\Local\_scoop\apps\brave\current\User Data" --profile-directory="Profile 4"
 
-Write-Host "##############################"
-Invoke-ResetAll
-Write-Host "##############################"
 # SIG # Begin signature block
 # MIIGMgYJKoZIhvcNAQcCoIIGIzCCBh8CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzqISE1azxRXYbQUORqYlORzg
-# stagggPIMIIDxDCCAqygAwIBAgIQRqaG/Zc3Po5BF31FOLqbBTANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxPWRFHUUDNQaCmSjIY+SzFkL
+# D5ygggPIMIIDxDCCAqygAwIBAgIQRqaG/Zc3Po5BF31FOLqbBTANBgkqhkiG9w0B
 # AQsFADAfMR0wGwYDVQQDDBRNZW55QnVzaCBQcm9kdWN0aW9uczAeFw0yNjA3MDQx
 # MjE4MTZaFw0yOTA3MDQxMjI4MTVaMB8xHTAbBgNVBAMMFE1lbnlCdXNoIFByb2R1
 # Y3Rpb25zMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApsU5F3dB4odF
@@ -33,12 +35,12 @@ Write-Host "##############################"
 # zq2tXv8sImITL5ULDqcxggHUMIIB0AIBATAzMB8xHTAbBgNVBAMMFE1lbnlCdXNo
 # IFByb2R1Y3Rpb25zAhBGpob9lzc+jkEXfUU4upsFMAkGBSsOAwIaBQCgeDAYBgor
 # BgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3DQEJAzEMBgorBgEEAYI3AgEE
-# MBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBTd
-# o5hnxBxp10vSZOMnxkfIniKEyjANBgkqhkiG9w0BAQEFAASCAQBpHq/b3MpmOobH
-# zWwHkspkCnBEGfSLxZSv6yuojJi9Nnonks4vlGA2rjkni2UgkGl8VI+XCnPUSPjn
-# /PS+JF2nASK0fb8eMNZ6V/QuwPIHjPmKTQw9GWhp9+wHnFjOnj6jJCfJch1iy0HB
-# 2O1WHMoYxbXAPV8Q+bahb2qLHa97wkEZJpbCPtm7PetlisSGfbAJqSj56cKNRPrw
-# HpUMi50Tn6laDbhDBGzJMwFFCjX1f26B1Sv8tI6oCx0s4+B5ymytBUW6ffZ7lt2q
-# hA7n9RMQz7rAxpsMEeHkeAjkmRSVT9ar1RikPqx+hZcQY5bPV2HHsDojugghmIKD
-# vgHckpRE
+# MBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBSB
+# IvsFg+JED3cy5/EYG+UXPZ9LcDANBgkqhkiG9w0BAQEFAASCAQCM7bfpD+Gjxbad
+# K04K/9wNG23XTRFfltwSuRO3Sbz0pPTu1KzoSEpUlEFF5Yx3/sntF+dzCjYCZmgH
+# cIgk22FltTOfsJCOHbJ+fD5SEVKsHN43ZdP44SniYtUF8xt4vR18MOKBdV/g09EA
+# aeoWnzAsM/7pqnzHEZq256+OaBT5HedooB5ymIfxT68XmxYGb1kyprXN5eJnIEe/
+# tkdLTLqNFgk7QmMhebcJBzwQgpm5UdpLH1j1bO26Caa/BN/8CIb6tuK84q3NEy7L
+# nr3xcWrQjwha765mD86DR/hxvHD//HcaXNCFzgeVhC1Z8D0+Ax8tiRCFyG+lraUw
+# vCxIRh3O
 # SIG # End signature block

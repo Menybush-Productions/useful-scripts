@@ -7,5 +7,5 @@ goto :eof
 :run
 
 cd /d "%~dp0"
-powershell -NoProfile -ExecutionPolicy AllSigned -Command "& '.\moveWindow.ps1'"
-powershell -NoProfile -ExecutionPolicy AllSigned -Command "& '.\firewallCleanup.ps1'"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "& '.\moveWindow.ps1'"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "& '.\rcloneMountFolderAsDrive.ps1'"

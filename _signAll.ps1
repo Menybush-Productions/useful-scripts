@@ -1,3 +1,6 @@
+function Get-Certificate {
+  return Get-ChildItem Cert:\CurrentUser\My -CodeSigningCert | Where-Object { $_.Thumbprint -Match '0BC70FF6EFB07FD9AE2F6EC7F87F99174EF9C93D' }
+}
 function Invoke-ReadKey {
 	param (
 		[Parameter(Mandatory = $false)] [string]$message = "Press a key to continue..."
@@ -6,45 +9,32 @@ function Invoke-ReadKey {
 	$null = [System.Console]::ReadKey($true)
 	Clear-Host
 }
-function Get-FWRules {
-	Write-Output "Invalid Firewall Rules:"
-	Get-NetFirewallApplicationFilter | ForEach-Object {
-		$program = $_.Program
-		if ([System.IO.Path]::IsPathRooted($program)) {
-			if (!(Test-Path -Path "$program" -PathType Leaf)) {
-				Write-Output "$program"
-			}
-		}
-	}
-}
-function Clear-FWRules {
-	Write-Output "Removing Invalid Firewall Rules:"
-	Get-NetFirewallApplicationFilter | ForEach-Object {
-		$program = $_.Program
-		if ([System.IO.Path]::IsPathRooted($program)) {
-			if (!(Test-Path -Path "$program" -PathType Leaf)) {
-				Write-Output "Removed: $program"
-				$_ | Remove-NetFirewallRule
-			}
-		}
-	}
+
+Write-Host 'Signing all PowerShell scripts in the current directory recursively...' -ForegroundColor Cyan
+Write-Host '############################'
+
+Get-ChildItem -Path $PSScriptRoot -Filter *.ps1 -Recurse | ForEach-Object {
+  $cert = Get-Certificate
+  if (!$cert) {
+    Invoke-ReadKey -message "No code signing certificate found. Press any key to exit..."
+    return
+  }
+  $status = Set-AuthenticodeSignature -FilePath $_.FullName -Certificate $cert
+  if ($status.Status -eq 'Valid') {
+    Write-Host "Success: $($_.FullName)" -ForegroundColor Green
+  }
+  else {
+    Write-Host "Error: $($_.FullName)" -ForegroundColor Red
+  }
 }
 
-Write-Host "#############################################"
-Get-FWRules
-
-$confirm = Read-Host "Do your really want to remove these invalid rules? [y/n]"
-if($confirm -eq "y") { Clear-FWRules }
-
-Write-Host "Script completed successfully!" -ForegroundColor Green
-Write-Host "#############################################"
-Invoke-ReadKey -Message "Press a key to exit!"
-
+Write-Host '############################'
+Invoke-ReadKey -message "Press any key to exit..."
 # SIG # Begin signature block
 # MIIGMgYJKoZIhvcNAQcCoIIGIzCCBh8CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUEKqMnQ3nlr2R/LyICbEknIkI
-# 7POgggPIMIIDxDCCAqygAwIBAgIQRqaG/Zc3Po5BF31FOLqbBTANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrz4t6C7zVeZpDGvcHlWPe+Ik
+# Ys6gggPIMIIDxDCCAqygAwIBAgIQRqaG/Zc3Po5BF31FOLqbBTANBgkqhkiG9w0B
 # AQsFADAfMR0wGwYDVQQDDBRNZW55QnVzaCBQcm9kdWN0aW9uczAeFw0yNjA3MDQx
 # MjE4MTZaFw0yOTA3MDQxMjI4MTVaMB8xHTAbBgNVBAMMFE1lbnlCdXNoIFByb2R1
 # Y3Rpb25zMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApsU5F3dB4odF
@@ -67,12 +57,12 @@ Invoke-ReadKey -Message "Press a key to exit!"
 # zq2tXv8sImITL5ULDqcxggHUMIIB0AIBATAzMB8xHTAbBgNVBAMMFE1lbnlCdXNo
 # IFByb2R1Y3Rpb25zAhBGpob9lzc+jkEXfUU4upsFMAkGBSsOAwIaBQCgeDAYBgor
 # BgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3DQEJAzEMBgorBgEEAYI3AgEE
-# MBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBR1
-# 3bc6i5elTaivbCEH5av2utxsSzANBgkqhkiG9w0BAQEFAASCAQBkXQKVr29+44rS
-# wrEM/ZyRh8YUrHrn8qxzX2T3E/zYNv7cmcNC3NuZI2IwokiPUqH5oUVtCg8geKS6
-# mgaRSwSeYNgRQGY0xLHZ62MqCT5T4CWb1V4ULsV9FRw0op56Lo0jcCijat42knn2
-# 2wt3+2OE0lay+IdeJGFyQ8UgsZLQUrWE4Ob0WqnlgDAmwxq2QixOYTAD7v7Ut/gd
-# x48ToTCpslujrxW687x7FXokU17O2K7WVsqULQvMK4maL7L+7qyNjtN5iM9h04FE
-# dXqJYiPlsw0r3QYdAo+klX1xr/qZY5cLLGd/c1Qf7uuo2+SzS+L1YhrMMq9tb/An
-# AxgeWsCF
+# MBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBSc
+# NNsIymTbSTHnu5TSr+V4R6zz/DANBgkqhkiG9w0BAQEFAASCAQCIa3jAoFucJ+Qz
+# n8tiLBsimbYO8lFr9oiR3B3K97/t/MHGemPJd4vrFTZdk7pZzE+HOgOZlSdVvSvd
+# Iah8a8THKqchhicRMMeBwkI5d1ESQDd59MYQMevVmVDl65Cn/orXubJkyEPuigGF
+# yes/brr0AG/OJB/Z6St/Y7zsSDKXn1wsR8UlGgO4HTnq1LDYN4DkZn7C2sH2ioI5
+# gG8EwrBH11F1oj6ZCoTNQaXJU1xWXNQlFRY6rm8/NJN0TyANCw0MV38NgTNOOXf8
+# gzb8y1wT6Sz17DhGHY/KS5do8zK3gaT/W3/Dmhz9X9rXkinDV2svgz6hrzvLx+D+
+# f4XmMY9F
 # SIG # End signature block
