@@ -52,7 +52,7 @@ do {
 
 		Write-Host $header1
 		Write-Host "Press Escape or CTRL+C to exit!" -ForegroundColor Cyan
-
+		
 		$key = [Console]::ReadKey($true)
 		switch ($key.Key) {
 			"UpArrow" {
@@ -64,8 +64,8 @@ do {
 				break
 			}
 			"Enter" {
-				$pkgName = ($list[$idx] -split '\s{2,}')[1] -replace '\s.*'
-				Write-Host ""
+				$pkgName = $list[$idx].Remove($header0.IndexOf("Version")).Remove(0, $header0.IndexOf("Id")).Trim()
+				Write-Host "$pkgName" -ForegroundColor Green
 				Write-Host "############################"
 				winget upgrade $pkgName
 				Write-Host "############################"
@@ -90,8 +90,8 @@ do {
 # SIG # Begin signature block
 # MIIGMgYJKoZIhvcNAQcCoIIGIzCCBh8CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU3Q24rDsEMkw1b3F5uK2r9mo4
-# UGSgggPIMIIDxDCCAqygAwIBAgIQRqaG/Zc3Po5BF31FOLqbBTANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU46YzgdFrLy+nSYFs6ZWqLTzQ
+# DXSgggPIMIIDxDCCAqygAwIBAgIQRqaG/Zc3Po5BF31FOLqbBTANBgkqhkiG9w0B
 # AQsFADAfMR0wGwYDVQQDDBRNZW55QnVzaCBQcm9kdWN0aW9uczAeFw0yNjA3MDQx
 # MjE4MTZaFw0yOTA3MDQxMjI4MTVaMB8xHTAbBgNVBAMMFE1lbnlCdXNoIFByb2R1
 # Y3Rpb25zMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApsU5F3dB4odF
@@ -114,12 +114,12 @@ do {
 # zq2tXv8sImITL5ULDqcxggHUMIIB0AIBATAzMB8xHTAbBgNVBAMMFE1lbnlCdXNo
 # IFByb2R1Y3Rpb25zAhBGpob9lzc+jkEXfUU4upsFMAkGBSsOAwIaBQCgeDAYBgor
 # BgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3DQEJAzEMBgorBgEEAYI3AgEE
-# MBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBR1
-# /8XyhGPckJcf37B6bLDJxIfTkzANBgkqhkiG9w0BAQEFAASCAQBkP8j+QRebbeRH
-# GUvmGJh/HnaQPA6qBPhqJfZTw5GQ7wb6xfR7vlJm+exQSO4xnafJhzP8QJ4XOEXN
-# 99TB6gg3SHimlxB1OgttIAFekXlmE1qfarR+DoBt0Pke5ogRBeLUeVl5UQdrPCJa
-# BGOh+iHQ8M+/NpzDicpB9o8SbGwJBNTgZ6FLM0H7pE2OATkJro50dSlW0tFeAg7V
-# U1zX/i6jUCLUVLbkefbH9DMWFWGiBlwg91hr6laQIdJWDpe1VxjrVoJS6A9nDgDX
-# wgO6/+fmsD13S97RrAYH3+9uCi3RVccoeAjchHDU9LrauUmrNd9aVPe+ENsffZft
-# Ll4Ip4CQ
+# MBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBS1
+# DfRjZDhMPoCNkWtmNzY7cG+xGjANBgkqhkiG9w0BAQEFAASCAQBuFKgSWdUVeDqj
+# MNWE2E3MpYKwPbzdfM5KU8uINqzjjVIIF0haqVM0mseFVoblXgDq8EVb0JRk3mWz
+# oULjuVHwX/1gaVmcDVOrOxXKFVbyKaed8nzSjiOV18NsbJWX9uAdQs4bS5UVXRvT
+# Moh9dZE9O2fsFGvQGRyIJzeUHVTt33G/FNyyhcVFdun25i/lEOFiC9UrwAb/LunI
+# WYFRv3VACkp2C8XAfb3DD1JGn7AovSEtxaoTvF7ZZq3jT5Pt1tr0huwfCVHc5ETW
+# 4jfJcYNo8+9LuWL4hIIyW+6lJXf8v75/10BV1HNfbKBnNObfCKcZUo/psSttfb14
+# Q6XtvjK7
 # SIG # End signature block
