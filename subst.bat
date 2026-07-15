@@ -1,7 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
 
+set source="%~1"
+set dest="%~2"
+
 powershell			^
 	-NoProfile		^
 	-ExecutionPolicy Bypass ^
-	-File ".\subst.ps1" -Source "%source%" -Dest "%dest%"
+	-Command "& '.\subst.ps1' -Source '%source%' -Dest '%dest%'"

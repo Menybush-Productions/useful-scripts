@@ -8,22 +8,22 @@ param (
 Write-Host "#############################################"
 
 $src = $source
-$dst = $dest.Replace(":", "").Replace("\", "")
+$dst = $dest.Replace(":", "").Replace("\", "") + ":"
 
-Write-Host "Src: $src"
-Write-Host "Dst: $dst"
+if (Test-Path $dst) {
+    subst $dst /d > $null 2>&1
+}
 
-Remove-PSDrive 	-Name $dst
-New-PSDrive 	-Name $dst -PSProvider FileSystem -Root $src -Scope Global -Verbose
-
+subst "$dst" "$src"
+Write-Host "Mounted $src successfully!" -ForegroundColor Green
 Write-Host "#############################################"
 
 exit 0
 # SIG # Begin signature block
 # MIIGMgYJKoZIhvcNAQcCoIIGIzCCBh8CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOEx1l62zHMg+nMQ4kAbGD3qz
-# pv2gggPIMIIDxDCCAqygAwIBAgIQRqaG/Zc3Po5BF31FOLqbBTANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJnoSt5s+v+b5wucYHWae20d7
+# xpCgggPIMIIDxDCCAqygAwIBAgIQRqaG/Zc3Po5BF31FOLqbBTANBgkqhkiG9w0B
 # AQsFADAfMR0wGwYDVQQDDBRNZW55QnVzaCBQcm9kdWN0aW9uczAeFw0yNjA3MDQx
 # MjE4MTZaFw0yOTA3MDQxMjI4MTVaMB8xHTAbBgNVBAMMFE1lbnlCdXNoIFByb2R1
 # Y3Rpb25zMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApsU5F3dB4odF
@@ -46,12 +46,12 @@ exit 0
 # zq2tXv8sImITL5ULDqcxggHUMIIB0AIBATAzMB8xHTAbBgNVBAMMFE1lbnlCdXNo
 # IFByb2R1Y3Rpb25zAhBGpob9lzc+jkEXfUU4upsFMAkGBSsOAwIaBQCgeDAYBgor
 # BgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3DQEJAzEMBgorBgEEAYI3AgEE
-# MBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBR/
-# SIehMqu/NqIuOdbTzVzcVEmuojANBgkqhkiG9w0BAQEFAASCAQBDlfzlnoOExbqv
-# h0aAltOO+5WG17poTVWgPWDqdAjr9cx4GtECp1/uv5kjngat44B+pbJrVR/CaL9A
-# uFBPQb0HZecYiHd+MU8KS679K6CaHxMCfeNBcPjXN1rta/+vaex9P/74oZeAIeFP
-# Nhdv2Pk3byV+t/xvc1P2UFA2qojEaqJzybLIn5dzzWWTVmMxP5ZwQ4+ZH4u3IxB4
-# CslDvEaLs6zR0oh4Be2umBmW2u1gEf5xiaEtjifO4w/neMu94MMes6BP+UTpuBsL
-# Tn6vm+w1vN/vblZDgEiUb+8PmVID0a4pzsVPFviEPr6Z20zP2xPqXg2vlDavTt8C
-# wLMAZ666
+# MBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBTj
+# Dg/Rax3zuXD15k+CFaGnAE0mMDANBgkqhkiG9w0BAQEFAASCAQAYRRsd1qbjwi/g
+# q/gvfAFs45MqftkGvXchJtb+n2cijXKKQEfLa9jtQz9AGyH48109tCFAXPAzBFKI
+# IvMLhBvpzTc/apPrS9ab+Tpq/TJsPy2sYwOlQD8YZpS5DR9vQuN4RBapiFOJ3J0I
+# LTN9TaUC/aKJnlR5av9mOcJD0Y6Mq1rBUh36xsBu4NeajKV2JUmqTZPYw9tn+8PC
+# iCB2TaXbEh3MNqWiLCZ9xJMO8eJQWZqvzUfWb9NZyF3NYXOcuv7o6bxYxGpSFhyu
+# DsLq3eK3tpOFPDz5lI9VGSJ3hE5nJlqcG+gT3O6ix/L+S0DdY8m1T84jFHpovQWa
+# AmYL6ZB3
 # SIG # End signature block
