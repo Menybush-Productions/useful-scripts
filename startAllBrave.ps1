@@ -1,6 +1,6 @@
 param
 (
-	[string]$exeLocation
+	[string]$exeLocation,
 	[string]$dataLocation
 )
 C:\Users\Adam\AppData\Local\_scoop\apps\brave\current\brave.exe --user-data-dir="C:\Users\Adam\AppData\Local\_scoop\apps\brave\current\User Data" --profile-directory="Default"
@@ -11,8 +11,8 @@ C:\Users\Adam\AppData\Local\_scoop\apps\brave\current\brave.exe --user-data-dir=
 # SIG # Begin signature block
 # MIIGMgYJKoZIhvcNAQcCoIIGIzCCBh8CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxPWRFHUUDNQaCmSjIY+SzFkL
-# D5ygggPIMIIDxDCCAqygAwIBAgIQRqaG/Zc3Po5BF31FOLqbBTANBgkqhkiG9w0B
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUq2F9HZL8gAS6GqGlqLL4tWWR
+# /OqgggPIMIIDxDCCAqygAwIBAgIQRqaG/Zc3Po5BF31FOLqbBTANBgkqhkiG9w0B
 # AQsFADAfMR0wGwYDVQQDDBRNZW55QnVzaCBQcm9kdWN0aW9uczAeFw0yNjA3MDQx
 # MjE4MTZaFw0yOTA3MDQxMjI4MTVaMB8xHTAbBgNVBAMMFE1lbnlCdXNoIFByb2R1
 # Y3Rpb25zMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApsU5F3dB4odF
@@ -35,12 +35,12 @@ C:\Users\Adam\AppData\Local\_scoop\apps\brave\current\brave.exe --user-data-dir=
 # zq2tXv8sImITL5ULDqcxggHUMIIB0AIBATAzMB8xHTAbBgNVBAMMFE1lbnlCdXNo
 # IFByb2R1Y3Rpb25zAhBGpob9lzc+jkEXfUU4upsFMAkGBSsOAwIaBQCgeDAYBgor
 # BgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3DQEJAzEMBgorBgEEAYI3AgEE
-# MBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBSB
-# IvsFg+JED3cy5/EYG+UXPZ9LcDANBgkqhkiG9w0BAQEFAASCAQCM7bfpD+Gjxbad
-# K04K/9wNG23XTRFfltwSuRO3Sbz0pPTu1KzoSEpUlEFF5Yx3/sntF+dzCjYCZmgH
-# cIgk22FltTOfsJCOHbJ+fD5SEVKsHN43ZdP44SniYtUF8xt4vR18MOKBdV/g09EA
-# aeoWnzAsM/7pqnzHEZq256+OaBT5HedooB5ymIfxT68XmxYGb1kyprXN5eJnIEe/
-# tkdLTLqNFgk7QmMhebcJBzwQgpm5UdpLH1j1bO26Caa/BN/8CIb6tuK84q3NEy7L
-# nr3xcWrQjwha765mD86DR/hxvHD//HcaXNCFzgeVhC1Z8D0+Ax8tiRCFyG+lraUw
-# vCxIRh3O
+# MBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEVMCMGCSqGSIb3DQEJBDEWBBSJ
+# W8TzhCz3GFGbgrMpCx+BwKjYDDANBgkqhkiG9w0BAQEFAASCAQBG8bFhK04wZpCJ
+# ckngJaqzQTmSA8DpJhSiCCvC9a603d1AVgX6n8NoWEKFKop6UHt6GwfZ2MoWInXo
+# xeRcpxMar5BfxgZtcLKA7r0XgbH//GR2oebFmR9+mDjxRA805kpz+sswzISQdKXh
+# oqlTOakc/hc7yXCU69GZVYTKGh6jCVSPj4rMLGiSSAmJfJm+8qweG+WGRCs1XByP
+# agrXEmzHdpVqvKoLCvTsuowcayaFkNSExq5BKbfpcnPbNtawvFwSp1UM1/LWu7mA
+# qcmr2eGLK0K55uahkNpiIoy1Br2xI3KqTYJ/WmO2cdGt99/yO2fic+dby2LFdLnC
+# peIghs9K
 # SIG # End signature block
