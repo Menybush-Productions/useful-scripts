@@ -1,0 +1,6 @@
+{
+	"ignore": [
+		"RevoUninstaller.RevoUninstallerPro",
+		"Nvidia.PhysXLegacy"
+	]
+}
